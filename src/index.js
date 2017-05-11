@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import SeachRepo from './components/SearchRepo';
 import './index.css';
 
 ReactDOM.render(
-  <App />,
+  <SeachRepo />,
   document.getElementById('root')
 );

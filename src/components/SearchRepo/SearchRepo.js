@@ -1,12 +1,11 @@
 import React from 'react';
-import './App.css';
 
 export const App = () => (
-  <div className="App">
-    <div className="App-header">
+  <div >
+    <div>
       <h2>Welcome to React</h2>
     </div>
-    <p className="App-intro">
+    <p >
       To get started, edit <code>src/App.js</code> and save to reload.
     </p>
   </div>
