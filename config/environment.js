@@ -1,3 +1,3 @@
 export default {
-  reduxLogger: false
+  reduxLogger: true
 }
