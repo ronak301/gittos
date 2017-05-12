@@ -3,6 +3,8 @@ import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 
+console.disableYellowBox = true;
+
 import AppReducer from './reducers';
 import AppWithNavigationState from './navigators/AppNavigator';
 

@@ -5,7 +5,18 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 import SearchRepo from '../components/SearchRepo';
 
 export const AppNavigator = StackNavigator({
-  Main: { screen: SearchRepo },
+  Main: {
+    screen: SearchRepo,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: 'rgb(50,50,50)'
+      },
+      title: "Repositories",
+      headerTitleStyle: {
+        color: 'white'
+      }
+    },
+  },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
