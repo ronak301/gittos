@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
-import { SearchBar } from 'native-blocks';
-import { get as _get } from 'lodash';
-import fixtures from '../../fixtures';
+import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { SearchBar, EmptyScreen } from 'native-blocks';
+import { get as _get, isEmpty as _isEmpty, debounce as _debounce } from 'lodash';
 import styles from './SearchRepo.style';
 
 class SearchRepo extends Component {
@@ -20,7 +19,7 @@ class SearchRepo extends Component {
 
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={styles.container}>
         {this.renderSearchBar()}
         {this.renderRepositoriesList()}
       </View>
@@ -38,11 +37,29 @@ class SearchRepo extends Component {
   }
 
   renderRepositoriesList = () => {
+    const { data, isLoading, isError } = this.props
+    if (isLoading) {
+      return (
+        <View style={styles.loadingContainer}><ActivityIndicator size="small" /></View>
+      );
+    }
+    if (_isEmpty(data) && isError === false) {
+      return (
+        <EmptyScreen description={'No data'}/>
+      )
+    }
+    if (_isEmpty(data) && isError) {
+      return (
+        <EmptyScreen description={'Opss Something went wrong.Please try again later'}/>
+      )
+    }
     return (
       <FlatList
         renderItem={this.renderItem}
-        data={fixtures.items}
+        data={data}
         keyExtractor={this._keyExtractor}
+        keyboardDismissMode='on-drag'
+        keyboardShouldPersistTaps="always"
       />
     );
   }
@@ -56,12 +73,12 @@ class SearchRepo extends Component {
     return (
       <TouchableOpacity>
         <View style={styles.row}>
-          <View style={styles.profileImageContainer}><Image source={{uri: imageSource}} style={styles.profileImage} /></View>
+          <View style={styles.profileImageContainer}><Image defaultSource={require('../../assets/defaultUserImage.png')} source={{uri: imageSource}} style={styles.profileImage} /></View>
           <View style={styles.contentContainer}>
             <Text style={styles.repoName} numberOfLines={1}>{repoName}</Text>
             <Text style={styles.ownerName} numberOfLines={1}>{ownerName}</Text>
             <View style={styles.bottomRow}>
-              <Text style={styles.starCount} numberOfLines={1}>{starCount}</Text>
+              <Text style={styles.starCount} numberOfLines={1}>{`${starCount} stars`}</Text>
               <Text style={styles.createdAt} numberOfLines={1}>{`created at: ${createdAt.substr(0,10)}`}</Text>
             </View>
           </View>
@@ -72,13 +89,19 @@ class SearchRepo extends Component {
 
   _keyExtractor = (item, index) => item.id;
 
-  onChangeText = (text) => {
+  onChangeText = _debounce( (text) => {
+    if(text === '') {
+      return ;
+    }
     const { onChangeTextInputValue } = this.props;
     onChangeTextInputValue && onChangeTextInputValue(text);
-  }
+  }, 500)
 }
 
 SearchRepo.propTypes = {
+  data: PropTypes.array,
+  isLoading: PropTypes.bool,
+  isError: PropTypes.bool,
   currentSearchText: PropTypes.string,
   onChangeTextInputValue: PropTypes.func
 }

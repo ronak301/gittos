@@ -1,6 +1,7 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
+import promise from './promise';
 import {persistStore, autoRehydrate} from 'redux-persist'
 
 import rootReducer from '../reducers';
@@ -27,7 +28,7 @@ export default function configureStore(initialState = getInitialState()) {
   if (store) {
     return store;
   }
-  const middlewares = [thunk];
+  const middlewares = [promise, thunk];
   if (environment.reduxLogger && process.env.NODE_ENV === 'development') {
     middlewares.push(createLogger());
   }

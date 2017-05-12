@@ -1,6 +1,15 @@
 import { StyleSheet, PixelRatio } from 'react-native';
 
 export default StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor: 'white'
+  },
+  loadingContainer: {
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   row: {
     flexDirection: 'row',
     backgroundColor: 'white'
@@ -27,7 +36,8 @@ export default StyleSheet.create({
     flexShrink: 1,
     fontWeight: '500',
     color: 'rgb(77,140,203)',
-    paddingBottom: 3
+    paddingBottom: 3,
+    fontSize: 16
   },
   ownerName: {
     flexShrink: 1,
