@@ -5,6 +5,7 @@
 
 const nativeBlocks = {
   get SearchBar() { return require('./SearchBar'); },
+  get ListView() { return require('./ListView'); },
 }
 
 module.exports = nativeBlocks
