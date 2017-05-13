@@ -18,6 +18,7 @@ class SearchRepo extends Component {
   }
 
   render() {
+    const { currentSearchText } = this.props;
     return (
       <View style={styles.container}>
         {this.renderSearchBar()}
@@ -95,7 +96,7 @@ class SearchRepo extends Component {
     }
     const { onChangeTextInputValue } = this.props;
     onChangeTextInputValue && onChangeTextInputValue(text);
-  }, 500)
+  }, 300)
 }
 
 SearchRepo.propTypes = {

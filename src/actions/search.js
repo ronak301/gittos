@@ -1,10 +1,27 @@
+import { isEmpty as _isEmpty, get as _get } from 'lodash';
 import { SEARCH_INPUT_VALUE_CHANGE } from '../constants/search';
 import { seacrhForKey } from '../api/search';
 
-export const onChangeTextInputValue = (newValue) => {
-  return {
-    type: SEARCH_INPUT_VALUE_CHANGE,
-    payload: seacrhForKey(newValue),
-    meta: newValue
+const getAlreadyExistingResult = (searchText, state) => {
+  return _get(state, `repositories.searchedEntitiesMap.${searchText}`)
+}
+
+export const onChangeTextInputValue = (searchText) => {
+  return (dispatch, getState) => {
+    const alreadyExistingResult = getAlreadyExistingResult(searchText, getState());
+    if (!_isEmpty(alreadyExistingResult)) {
+      dispatch({
+        type: SEARCH_INPUT_VALUE_CHANGE,
+        payload: Promise.resolve(alreadyExistingResult),
+        meta: searchText
+      })
+    } else {
+      dispatch({
+        type: SEARCH_INPUT_VALUE_CHANGE,
+        payload: seacrhForKey(searchText ).then(res => res.items),
+        meta: searchText
+      })
+    }
+
   }
 }
