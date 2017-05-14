@@ -3,8 +3,8 @@ import { SEARCH_INPUT_VALUE_CHANGE } from '../constants/index';
 import { seacrhForKey } from '../api/search';
 
 const getAlreadyExistingResult = (searchText, state) => {
-  return _get(state, `repositories.searchedEntitiesMap.${searchText}`)
-}
+  return _get(state, `repositories.searchedEntitiesMap.${searchText}`);
+};
 
 export const onChangeTextInputValue = (searchText) => {
   return (dispatch, getState) => {
@@ -13,15 +13,14 @@ export const onChangeTextInputValue = (searchText) => {
       dispatch({
         type: SEARCH_INPUT_VALUE_CHANGE,
         payload: Promise.resolve(alreadyExistingResult),
-        meta: searchText
-      })
+        meta: searchText,
+      });
     } else {
       dispatch({
         type: SEARCH_INPUT_VALUE_CHANGE,
-        payload: seacrhForKey(searchText ).then(res => res.items),
-        meta: searchText
-      })
+        payload: seacrhForKey(searchText).then(res => res.items),
+        meta: searchText,
+      });
     }
-
-  }
-}
+  };
+};

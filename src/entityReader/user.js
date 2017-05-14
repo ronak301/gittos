@@ -1,23 +1,22 @@
 import { get as _get } from 'lodash';
 
 export const getName = (user) => {
-  return _get(user, 'name', '')
-}
+  return _get(user, 'name', '');
+};
 
 export const getFirstName = (user) => {
-  console.log("readererrr", user);
-  const fullName = _get(user, 'userInfo.name', '')
+  console.log('readererrr', user);
+  const fullName = _get(user, 'userInfo.name', '');
   return fullName.split(' ').slice(0, -1).join(' ');
-}
+};
 
 export const isUserLoggedIn = (user) => {
-  return !!user.accessToken
-}
-
+  return !!user.accessToken;
+};
 
 
 //
-//{ login: 'ronak301',
+// { login: 'ronak301',
 //  id: 7058505,
 //  avatar_url: 'https://avatars2.githubusercontent.com/u/7058505?v=3',
 //  gravatar_id: '',

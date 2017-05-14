@@ -10,16 +10,16 @@ export default StyleSheet.create({
     width,
     backgroundColor: 'rgba(255,255,255,0.8)',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   topBarIcon: {
     paddingHorizontal: 8,
-    paddingVertical: 5
+    paddingVertical: 5,
   },
   closeText: {
     color: 'white',
     fontSize: 16,
     marginLeft: 10,
-    padding: 10
-  }
+    padding: 10,
+  },
 });

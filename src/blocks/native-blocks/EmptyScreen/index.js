@@ -1,3 +1,3 @@
 import EmptyScreen from './EmptyScreen';
 
-module.exports = EmptyScreen
+module.exports = EmptyScreen;

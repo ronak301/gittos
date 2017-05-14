@@ -14,16 +14,16 @@ export const AppNavigator = StackNavigator({
     screen: ClosableWebView,
     navigationOptions: {
       headerStyle: {
-        backgroundColor: 'rgb(50,50,50)'
+        backgroundColor: 'rgb(50,50,50)',
       },
-      title: "Login",
+      title: 'Login',
       headerTitleStyle: {
-        color: 'white'
-      }
+        color: 'white',
+      },
     },
-  }
+  },
 }, {
-  headerMode: 'screen'
+  headerMode: 'screen',
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

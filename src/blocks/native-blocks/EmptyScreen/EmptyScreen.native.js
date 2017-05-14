@@ -37,7 +37,7 @@ export default class EmptyScreen extends Component {
 
 EmptyScreen.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string
+  description: PropTypes.string,
 };
 
 module.exports = EmptyScreen;

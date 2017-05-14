@@ -2,7 +2,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import promise from './promise';
-import {persistStore, autoRehydrate} from 'redux-persist'
+import { persistStore, autoRehydrate } from 'redux-persist';
 
 import rootReducer from '../reducers';
 import environment from '../../config/environment';
@@ -42,7 +42,7 @@ export default function configureStore(initialState = getInitialState()) {
     )
   );
   persistStore(store, {
-    storage: ReduxPersist.storeConfig.storage
-  })
+    storage: ReduxPersist.storeConfig.storage,
+  });
   return store;
 }

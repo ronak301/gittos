@@ -6,6 +6,6 @@ export const saveUser = (user, accessToken) => {
   return {
     type: SAVE_USER,
     payload: user,
-    meta: accessToken
-  }
-}
+    meta: accessToken,
+  };
+};
