@@ -1,5 +1,5 @@
 import { isEmpty as _isEmpty, get as _get } from 'lodash';
-import { SEARCH_INPUT_VALUE_CHANGE } from '../constants/search';
+import { SEARCH_INPUT_VALUE_CHANGE } from '../constants/index';
 import { seacrhForKey } from '../api/search';
 
 const getAlreadyExistingResult = (searchText, state) => {

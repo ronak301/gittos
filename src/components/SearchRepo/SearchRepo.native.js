@@ -1,14 +1,24 @@
 import React, { PropTypes, Component } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { SearchBar, EmptyScreen } from 'native-blocks';
-import { get as _get, isEmpty as _isEmpty, debounce as _debounce } from 'lodash';
+import { get as _get, isEmpty as _isEmpty, debounce as _debounce, noop as _noop } from 'lodash';
+import { getFirstName } from '../../entityReader/user';
+import { getLoginUrl } from '../../utils/user';
 import styles from './SearchRepo.style';
 
 class SearchRepo extends Component {
 
-  //static navigationOptions = {
-  //  headerRight: <View></View>
-  //};
+  static navigationOptions = ({ navigation }) =>  {
+
+    const {state, setParams} = navigation;
+    const { navigate } = navigation
+    const rightMenu = state.params && state.params.rightButton ? state.params.rightButton : 'Login'
+    return {
+      headerRight: (
+        <TouchableOpacity onPress={() => { navigate('ClosableWebView', { url: getLoginUrl() }) }}><View><Text style={styles.loginText}>{rightMenu}</Text></View></TouchableOpacity>
+      )
+    }
+  }
 
   constructor(props) {
     super(props)
@@ -17,8 +27,16 @@ class SearchRepo extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (_isEmpty(this.props.user) && nextProps.user) {
+      this.props.navigation.setParams({
+        rightButton: `Hi, ${getFirstName(nextProps.user)}`,
+      });
+    }
+  }
+
   render() {
-    const { currentSearchText } = this.props;
+    const { user } = this.props;
     return (
       <View style={styles.container}>
         {this.renderSearchBar()}
@@ -80,7 +98,7 @@ class SearchRepo extends Component {
             <Text style={styles.ownerName} numberOfLines={1}>{ownerName}</Text>
             <View style={styles.bottomRow}>
               <Text style={styles.starCount} numberOfLines={1}>{`${starCount} stars`}</Text>
-              <Text style={styles.createdAt} numberOfLines={1}>{`created at: ${createdAt.substr(0,10)}`}</Text>
+              <Text style={styles.createdAt} numberOfLines={1}>{`created at: ${createdAt && createdAt.substr(0,10)}`}</Text>
             </View>
           </View>
         </View>
@@ -100,6 +118,7 @@ class SearchRepo extends Component {
 }
 
 SearchRepo.propTypes = {
+  user: PropTypes.object,
   data: PropTypes.array,
   isLoading: PropTypes.bool,
   isError: PropTypes.bool,

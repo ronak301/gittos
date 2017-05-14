@@ -25,7 +25,6 @@ function executeRequest(method, pathname, data, options = {}) {
 
 export default {
   get(pathname, options) {
-    console.log("reqqqqqqqqq");
     return executeRequest('get', pathname, null, options);
   },
 

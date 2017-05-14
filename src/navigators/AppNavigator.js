@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import SearchRepo from '../components/SearchRepo';
+import ClosableWebView from '../blocks/native-blocks/ClosableWebView';
 
 export const AppNavigator = StackNavigator({
   Main: {
@@ -17,6 +18,18 @@ export const AppNavigator = StackNavigator({
       }
     },
   },
+  ClosableWebView: {
+    screen: ClosableWebView,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: 'rgb(50,50,50)'
+      },
+      title: "Login",
+      headerTitleStyle: {
+        color: 'white'
+      }
+    },
+  }
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

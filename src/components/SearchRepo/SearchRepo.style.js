@@ -56,5 +56,11 @@ export default StyleSheet.create({
     fontSize: 12,
     color: '#939393',
     marginLeft: 30
+  },
+  loginText: {
+    color: 'white',
+    fontSize: 16,
+    marginRight: 10,
+    padding: 10
   }
 })

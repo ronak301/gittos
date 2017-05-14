@@ -7,7 +7,7 @@ import {
   SEARCH_INPUT_VALUE_CHANGE_LOADING,
   SEARCH_INPUT_VALUE_CHANGE_ERROR,
   SEARCH_INPUT_VALUE_CHANGE_SUCCESS
-} from '../constants/search';
+} from '../constants/index';
 
 
 export default function todos(state = [], action) {
