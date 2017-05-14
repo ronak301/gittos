@@ -4,6 +4,7 @@ import { SearchBar, EmptyScreen } from 'native-blocks';
 import { get as _get, isEmpty as _isEmpty, debounce as _debounce, noop as _noop } from 'lodash';
 import { getFirstName, isUserLoggedIn } from '../../entityReader/user';
 import { getLoginUrl, doItemBelongsToCurrentUser } from '../../utils/user';
+import { getImageSource, getRepoName, getOwnerName, getStarCount, getCreatedAt } from '../../entityReader/repo';
 import styles from './SearchRepo.style';
 
 class SearchRepo extends Component {
@@ -42,9 +43,15 @@ class SearchRepo extends Component {
     return (
       <View style={styles.toolbar}>
         <View style={styles.leftView}></View>
-        <View style={styles.centerView}><Text style={styles.title}>{'Repositories'}</Text></View>
+        {this.renderTitle()}
         {this.renderRightButton()}
       </View>
+    );
+  }
+
+  renderTitle = () => {
+    return (
+      <View style={styles.centerView}><Text style={styles.title}>{'Repositories'}</Text></View>
     );
   }
 
@@ -52,7 +59,7 @@ class SearchRepo extends Component {
     const { user }  = this.props;
     const rightButtonText = this.state.isUserLoggedIn ? `Hi, ${getFirstName(user)}` : 'Login';
     return (
-      <View style={styles.rightView}><TouchableOpacity onPress={this.onPressRightButton}><View><Text style={styles.loginText}>{rightButtonText}</Text></View></TouchableOpacity></View>
+      <View style={styles.rightView}><TouchableOpacity onPress={this.onPressRightButton}><View><Text numberOfLines={1} style={styles.loginText}>{rightButtonText}</Text></View></TouchableOpacity></View>
     );
   }
 
@@ -95,11 +102,13 @@ class SearchRepo extends Component {
   }
 
   renderItem = ({item}) => {
-    const imageSource = _get(item, 'owner.avatar_url')
-    const repoName = _get(item, 'name', '')
-    const ownerName = _get(item, 'owner.login')
-    const starCount = _get(item, 'stargazers_count')
-    const createdAt = _get(item, 'created_at')
+
+    const imageSource = getImageSource(item);
+    const repoName = getRepoName(item);
+    const ownerName = getOwnerName(item);
+    const starCount = getStarCount(item);
+    const createdAt = getCreatedAt(item);
+
     const { user } = this.props
     const highlightedStyle = doItemBelongsToCurrentUser(item, user) ? styles.highlightedStyle : {}
     return (
