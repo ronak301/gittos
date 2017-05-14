@@ -15,6 +15,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white'
   },
+  highlightedStyle: {
+    backgroundColor: 'rgba(0,0,0,0.05)'
+  },
   profileImageContainer: {
     marginHorizontal:15,
     paddingVertical: 15,

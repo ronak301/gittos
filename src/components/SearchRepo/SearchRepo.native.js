@@ -3,7 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator } from
 import { SearchBar, EmptyScreen } from 'native-blocks';
 import { get as _get, isEmpty as _isEmpty, debounce as _debounce, noop as _noop } from 'lodash';
 import { getFirstName, isUserLoggedIn } from '../../entityReader/user';
-import { getLoginUrl } from '../../utils/user';
+import { getLoginUrl, doItemBelongsToCurrentUser } from '../../utils/user';
 import styles from './SearchRepo.style';
 
 class SearchRepo extends Component {
@@ -29,7 +29,6 @@ class SearchRepo extends Component {
 
   render() {
     const { user } = this.props;
-    console.log('userrr', user);
     return (
       <View style={styles.container}>
         {this.renderToolbar()}
@@ -101,9 +100,11 @@ class SearchRepo extends Component {
     const ownerName = _get(item, 'owner.login')
     const starCount = _get(item, 'stargazers_count')
     const createdAt = _get(item, 'created_at')
+    const { user } = this.props
+    const highlightedStyle = doItemBelongsToCurrentUser(item, user) ? styles.highlightedStyle : {}
     return (
       <TouchableOpacity>
-        <View style={styles.row}>
+        <View style={[styles.row, highlightedStyle ]}>
           <View style={styles.profileImageContainer}><Image defaultSource={require('../../assets/defaultUserImage.png')} source={{uri: imageSource}} style={styles.profileImage} /></View>
           <View style={styles.contentContainer}>
             <Text style={styles.repoName} numberOfLines={1}>{repoName}</Text>
