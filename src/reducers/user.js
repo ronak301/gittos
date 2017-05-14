@@ -6,7 +6,7 @@ export default function user(state = [], action) {
     case SAVE_USER:
       newState = {
         ...state,
-        user: action.payload,
+        userInfo: action.payload,
         accessToken: action.meta
       }
       return newState;

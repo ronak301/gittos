@@ -1,4 +1,5 @@
-import { StyleSheet, PixelRatio } from 'react-native';
+import { StyleSheet, PixelRatio, Dimensions } from 'react-native';
+const window = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
@@ -62,5 +63,30 @@ export default StyleSheet.create({
     fontSize: 16,
     marginRight: 10,
     padding: 10
+  },
+  toolbar: {
+    height: 64,
+    width: window.width,
+    backgroundColor: 'rgb(50,50,50)',
+    alignItems: 'center',
+    paddingTop: 15,
+    flexDirection: 'row'
+  },
+  leftView: {
+    flex:1,
+    alignItems: 'center'
+  },
+  centerView: {
+    flex:1,
+    alignItems: 'center'
+  },
+  rightView: {
+    flex:1,
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'white'
   }
 })

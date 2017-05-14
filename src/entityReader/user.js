@@ -5,8 +5,13 @@ export const getName = (user) => {
 }
 
 export const getFirstName = (user) => {
-  const fullName = _get(user, 'name', '')
+  console.log("readererrr", user);
+  const fullName = _get(user, 'userInfo.name', '')
   return fullName.split(' ').slice(0, -1).join(' ');
+}
+
+export const isUserLoggedIn = (user) => {
+  return !!user.accessToken
 }
 
 

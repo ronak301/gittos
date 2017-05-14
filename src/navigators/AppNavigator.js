@@ -8,15 +8,7 @@ import ClosableWebView from '../blocks/native-blocks/ClosableWebView';
 export const AppNavigator = StackNavigator({
   Main: {
     screen: SearchRepo,
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: 'rgb(50,50,50)'
-      },
-      title: "Repositories",
-      headerTitleStyle: {
-        color: 'white'
-      }
-    },
+
   },
   ClosableWebView: {
     screen: ClosableWebView,
@@ -30,6 +22,8 @@ export const AppNavigator = StackNavigator({
       }
     },
   }
+}, {
+  headerMode: 'screen'
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

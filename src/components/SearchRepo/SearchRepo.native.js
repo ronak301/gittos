@@ -2,46 +2,58 @@ import React, { PropTypes, Component } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { SearchBar, EmptyScreen } from 'native-blocks';
 import { get as _get, isEmpty as _isEmpty, debounce as _debounce, noop as _noop } from 'lodash';
-import { getFirstName } from '../../entityReader/user';
+import { getFirstName, isUserLoggedIn } from '../../entityReader/user';
 import { getLoginUrl } from '../../utils/user';
 import styles from './SearchRepo.style';
 
 class SearchRepo extends Component {
 
-  static navigationOptions = ({ navigation }) =>  {
-
-    const {state, setParams} = navigation;
-    const { navigate } = navigation
-    const rightMenu = state.params && state.params.rightButton ? state.params.rightButton : 'Login'
-    return {
-      headerRight: (
-        <TouchableOpacity onPress={() => { navigate('ClosableWebView', { url: getLoginUrl() }) }}><View><Text style={styles.loginText}>{rightMenu}</Text></View></TouchableOpacity>
-      )
-    }
+  static navigationOptions = {
+    header: null
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      //searchText: ''
+      isUserLoggedIn: isUserLoggedIn(props.user)
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (_isEmpty(this.props.user) && nextProps.user) {
-      this.props.navigation.setParams({
-        rightButton: `Hi, ${getFirstName(nextProps.user)}`,
-      });
+      this.setState({
+        isUserLoggedIn: isUserLoggedIn(nextProps.user)
+      })
     }
   }
 
   render() {
     const { user } = this.props;
+    console.log('userrr', user);
     return (
       <View style={styles.container}>
+        {this.renderToolbar()}
         {this.renderSearchBar()}
         {this.renderRepositoriesList()}
       </View>
+    );
+  }
+
+  renderToolbar = () => {
+    return (
+      <View style={styles.toolbar}>
+        <View style={styles.leftView}></View>
+        <View style={styles.centerView}><Text style={styles.title}>{'Repositories'}</Text></View>
+        {this.renderRightButton()}
+      </View>
+    );
+  }
+
+  renderRightButton = () => {
+    const { user }  = this.props;
+    const rightButtonText = this.state.isUserLoggedIn ? `Hi, ${getFirstName(user)}` : 'Login';
+    return (
+      <View style={styles.rightView}><TouchableOpacity onPress={this.onPressRightButton}><View><Text style={styles.loginText}>{rightButtonText}</Text></View></TouchableOpacity></View>
     );
   }
 
@@ -104,6 +116,14 @@ class SearchRepo extends Component {
         </View>
       </TouchableOpacity>
     );
+  }
+
+  onPressRightButton = () => {
+    if(this.state.isUserLoggedIn) {
+      return ;
+    }
+    const { navigate } = this.props.navigation;
+    navigate('ClosableWebView', { url: getLoginUrl() })
   }
 
   _keyExtractor = (item, index) => item.id;
