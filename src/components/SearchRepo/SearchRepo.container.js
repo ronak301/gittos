@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   onChangeTextInputValue: (...args) => dispatch(onChangeTextInputValue(...args)),
 });
 
-export default connect(
+module.exports = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SearchRepo);
