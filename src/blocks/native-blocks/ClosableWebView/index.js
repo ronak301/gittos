@@ -1,1 +1,1 @@
-module.exports = require('./ClosableWebView.container');
+module.exports = require('./ClosableWebView');

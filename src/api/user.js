@@ -1,4 +1,5 @@
 import axios from 'axios';
+import url from 'url';
 import api from './baseApi';
 import env from '../../config/environment';
 
@@ -29,3 +30,17 @@ export const getUser = (accessToken) => {
       });
   });
 };
+
+export const login = (code) => {
+  return new Promise((resolve, reject) => {
+    getAuthToken(code ).then(res => {
+      const accessToken = res && res.substr(13, res.length -1 )
+      getUser(accessToken).then(user =>
+        resolve({
+          user,
+          accessToken
+        })
+      )
+    })
+  });
+}

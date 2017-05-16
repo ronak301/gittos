@@ -132,8 +132,12 @@ class SearchRepo extends Component {
     if(this.state.isUserLoggedIn) {
       return ;
     }
+    const { login } = this.props;
     const { navigate } = this.props.navigation;
-    navigate('ClosableWebView', { url: getLoginUrl() })
+    navigate('ClosableWebView', {
+      url: getLoginUrl(),
+      login: login
+    })
   }
 
   _keyExtractor = (item, index) => item.id;
@@ -153,7 +157,8 @@ SearchRepo.propTypes = {
   isLoading: PropTypes.bool,
   isError: PropTypes.bool,
   currentSearchText: PropTypes.string,
-  onChangeTextInputValue: PropTypes.func
+  onChangeTextInputValue: PropTypes.func,
+  login: PropTypes.func
 }
 
 export default SearchRepo;

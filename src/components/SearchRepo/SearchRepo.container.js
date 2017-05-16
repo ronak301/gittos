@@ -4,7 +4,7 @@ import SearchRepo from './SearchRepo';
 import { resolveRepo } from '../../entityResolver/repo';
 
 import { onChangeTextInputValue } from '../../actions/search';
-import { saveUser } from '../../actions/user';
+import { login } from '../../actions/user';
 
 const mapStateToProps = state => {
   const allEntities = get(state, 'repositories.entities', {});
@@ -20,8 +20,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeTextInputValue: (...args) => dispatch(onChangeTextInputValue(...args)),
-  saveUser: (...args) => dispatch(saveUser(...args)),
+  login: (...args) => dispatch(login(...args)),
+  onChangeTextInputValue: (...args) => dispatch(onChangeTextInputValue(...args))
 });
 
 export default connect(

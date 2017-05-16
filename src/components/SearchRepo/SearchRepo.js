@@ -10,18 +10,6 @@ import { getAuthToken, getUser } from '../../api/user';
 
 import './SearchRepo.css'
 
-
-var schema = [
-  { key: 'type' },
-  { key: 'legs', label: 'Number of Legs' }
-];
-
-var rows = [
-  { type: 'dog', legs: 4 },
-  { type: 'cat', legs: 4 },
-  { type: 'ant', legs: 6 }
-];
-
 class SearchRepo extends Component {
 
   constructor(props) {
@@ -43,6 +31,10 @@ class SearchRepo extends Component {
       })
     }
     this.doLoginStuff()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("hashchange");
   }
 
  render() {
@@ -148,8 +140,7 @@ class SearchRepo extends Component {
     window.location.replace(getLoginUrl())
   }
 
-  doLoginStuff = (event) => {
-    console.log(event);
+  doLoginStuff = () => {
     const that = this;
     const { saveUser } = this.props;
     const currentURL = window.location.href;
@@ -158,13 +149,7 @@ class SearchRepo extends Component {
     if(!code) {
       return ;
     }
-    getAuthToken(code).then(res => {
-      const accessToken = res && res.substr(13, res.length -1 )
-      getUser(accessToken).then(user => {
-        saveUser(user, accessToken);
-        window.location.replace('/')
-      })
-    })
+    this.props.login(code)
   }
 
   handleInputChange = (event) => {
@@ -189,19 +174,19 @@ class SearchRepo extends Component {
       },
       {
         Header: 'Repo Title',
-        accessor: 'title' // String-based value accessors!
+        accessor: 'title'
       },
       {
         Header: 'owner',
-        accessor: 'owner' // String-based value accessors!
+        accessor: 'owner'
       },
       {
         Header: 'Stars',
-        accessor: 'stars' // String-based value accessors!
+        accessor: 'stars'
       },
       {
         Header: 'createdAt',
-        accessor: 'createdAt' // String-based value accessors!
+        accessor: 'createdAt'
       }
     ]
   }
@@ -214,7 +199,7 @@ SearchRepo.propTypes = {
   isError: PropTypes.bool,
   currentSearchText: PropTypes.string,
   onChangeTextInputValue: PropTypes.func,
-  saveUser: PropTypes.func
+  login: PropTypes.func
 }
 
 module.exports = SearchRepo;

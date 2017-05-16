@@ -23,7 +23,8 @@ class ClosableWebView extends Component {
     title: PropTypes.string,
     onNavigationStateChange: PropTypes.func,
     onClose: PropTypes.func,
-    saveUser: PropTypes.func // via container
+    saveUser: PropTypes.func, // via container,
+    login: PropTypes.func
   };
 
   constructor(props) {
@@ -63,17 +64,13 @@ class ClosableWebView extends Component {
   };
 
   onNavigationStateChange = (navState) => {
-    const that = this;
-    const { saveUser } = this.props;
     const parsedUrl = url.parse(navState.url, true);
+    const { login } = this.props.navigation.state.params;
     const code = parsedUrl.query.code;
-    getAuthToken(code).then(res => {
-      const accessToken = res && res.substr(13, res.length -1 )
-      getUser(accessToken).then(user => {
-        saveUser(user, accessToken);
-        that.props.navigation.goBack();
-      })
-    })
+    if(code) {
+      login(code)
+      this.props.navigation.goBack();
+    }
   };
 
   popScene() {
