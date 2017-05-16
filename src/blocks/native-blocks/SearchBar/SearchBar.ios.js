@@ -4,13 +4,14 @@ import { SearchBar } from 'native-libs';
 
 class SearchBarBlock extends Component {
   render() {
-    const { onChangeText } = this.props;
+    const { onChangeText, value } = this.props;
     return (
         <SearchBar
           ref="searchBarBlock"
           onChangeText={onChangeText}
           placeholder="Search"
           enablesReturnKeyAutomatically
+          text={value}
           {...this.props}
         />
     );

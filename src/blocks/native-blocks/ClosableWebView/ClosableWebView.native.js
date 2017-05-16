@@ -29,11 +29,13 @@ class ClosableWebView extends Component {
 
   constructor(props) {
     super(props);
-    CookieManager.clearAll((err, res) => {
-      console.log('cookies cleared!');
-      console.log(err);
-      console.log(res);
-    });
+    if(Platform.OS === 'ios') {
+      CookieManager.clearAll((err, res) => {
+        console.log('cookies cleared!');
+        console.log(err);
+        console.log(res);
+      });
+    }
   }
 
   render() {
