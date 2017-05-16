@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { get as _get } from 'lodash';
 
 export const getImageSource = (item) => {
@@ -17,7 +18,8 @@ export const getStarCount = (item) => {
 };
 
 export const getCreatedAt = (item) => {
-  return _get(item, 'created_at', '');
+  const createdAt = _get(item, 'created_at', '');
+  return moment(createdAt).format('L')
 };
 
 export const getId = (item) => {
