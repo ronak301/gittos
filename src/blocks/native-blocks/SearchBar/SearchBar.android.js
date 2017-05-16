@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View } from 'react-native';
-import TextInput from '../TextInput';
-import Icon from '../Icon';
-import Button from '../Button';
+import { View, TextInput } from 'react-native';
 
 import styles from './SearchBar.style';
 
@@ -23,12 +20,12 @@ SearchBar.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   onSearchButtonPress: PropTypes.func,
   onClose: PropTypes.func,
-  showBackButton: PropTypes.bool
+  showBackButton: PropTypes.bool,
 };
 
 SearchBar.deafultProps = {
   customStyles: {},
-  showBackButton: false
+  showBackButton: false,
 };
 
 module.exports = SearchBar;

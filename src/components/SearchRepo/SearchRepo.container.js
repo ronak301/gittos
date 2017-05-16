@@ -21,7 +21,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
   login: (...args) => dispatch(login(...args)),
-  onChangeTextInputValue: (...args) => dispatch(onChangeTextInputValue(...args))
+  onChangeTextInputValue: (...args) => dispatch(onChangeTextInputValue(...args)),
 });
 
 export default connect(

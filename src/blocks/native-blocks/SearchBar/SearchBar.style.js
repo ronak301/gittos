@@ -2,16 +2,16 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    marginVertical: 10
+    marginVertical: 10,
   },
   searchContainer: {
     backgroundColor: 'white',
     android: {
-      elevation: 2
-    }
+      elevation: 2,
+    },
   },
   searchBarContainer: {
-    height: 30
+    height: 30,
   },
   searchBoxAndroid: {
     fontSize: 14,
@@ -19,7 +19,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     height: 50,
     backgroundColor: 'white',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   searchInput: {
     margin: 10,
@@ -29,14 +29,14 @@ export default StyleSheet.create({
     height: 30,
     fontSize: 14,
     paddingHorizontal: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   searchInputAndroid: {
-    flex: 1
+    flex: 1,
   },
   backButtonStyle: {
     paddingLeft: 5,
     paddingRight: 15,
-    paddingVertical: 8
-  }
+    paddingVertical: 8,
+  },
 });
