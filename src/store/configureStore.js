@@ -6,7 +6,7 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 
 import rootReducer from '../reducers';
 import environment from '../../config/environment';
-import ReduxPersist from '../../config/ReduxPersist';
+//import ReduxPersist from '../../config/ReduxPersist';
 
 let store = null;
 
@@ -38,11 +38,11 @@ export default function configureStore(initialState = getInitialState()) {
     compose(
       applyMiddleware(...middlewares),
       typeof window === 'object' && window.devToolsExtension && process.env.NODE_ENV === 'development' ? window.devToolsExtension() : f => f,
-      autoRehydrate()
+      //autoRehydrate()
     )
   );
-  persistStore(store, {
-    storage: ReduxPersist.storeConfig.storage,
-  });
+  //persistStore(store, {
+  //  storage: ReduxPersist.storeConfig.storage,
+  //});
   return store;
 }

@@ -2,7 +2,7 @@ import { get as _get } from 'lodash';
 import environment from '../../config/environment';
 
 export const getLoginUrl = () => {
-  return `https://github.com/login/oauth/authorize?client_id=${environment.client_id}`;
+  return `https://github.com/login/oauth/authorize?client_id=${environment.client_id}&redirect_uri=http://localhost:3000`;
 };
 
 export const doItemBelongsToCurrentUser = (item, user) => {

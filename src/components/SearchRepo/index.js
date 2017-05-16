@@ -1,3 +1,3 @@
-import SearchRepo from './SearchRepo.js';
+import SearchRepo from './SearchRepo.container';
 
 module.exports = SearchRepo;

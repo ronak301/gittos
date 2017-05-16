@@ -19,3 +19,7 @@ export const getStarCount = (item) => {
 export const getCreatedAt = (item) => {
   return _get(item, 'created_at', '')
 }
+
+export const getId = (item) => {
+  return _get(item, 'id', '')
+}
