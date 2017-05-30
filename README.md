@@ -1,4 +1,4 @@
- - This is regarding task given to me here: https://gist.github.com/callstack-io-bot/65b0e806c886f352aee8007dc9aadb57
+
  - This project contains React and React-Native (Both android and ios) code base in single repo.
 
 Functionalities it includes :
